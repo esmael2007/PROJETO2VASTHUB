@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Criar minha loja — VestHub</title>
+<meta name="description" content="Crie sua loja no VestHub em poucos minutos: dados da loja, personalização e conta.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="cadastro.css">
+</head>
+<body>
+
+<header class="site-header" id="header">
+  <div class="wrap header-inner">
+    <a class="brand" href="index.html">VEST<span class="hub">HUB</span></a>
+    <nav class="nav">
+      <a href="index.html#como-funciona">Como funciona</a>
+      <a href="index.html#recursos">Recursos</a>
+    </nav>
+    <a class="header-login" href="#entrar">Já tem uma loja? <strong>Entrar</strong></a>
+  </div>
+</header>
+
+<main>
+  <div class="wrap signup-wrap">
+
+    <p class="signup-eyebrow">Criar minha loja</p>
+    <h1 class="signup-title">Bora colocar sua loja <span class="hl">no ar</span>?</h1>
+
+    <div class="signup-card" data-step="1">
+
+      <!-- ===== painel visual (esquerda) ===== -->
+      <aside class="signup-visual" aria-hidden="true">
+
+        <div class="visual-step is-active" data-visual="1">
+          <div class="v-shape v-shape--blob"></div>
+          <div class="v-mock v-mock--store">
+            <div class="v-mock-top">
+              <span class="v-dot"></span>
+              <span class="v-dot"></span>
+              <span class="v-dot"></span>
+            </div>
+            <div class="v-field"><span></span></div>
+            <div class="v-field v-field--sm"><span></span></div>
+            <div class="v-field v-field--tag">
+              <em class="tag tag--lime">Roupas</em>
+              <em class="tag tag--pink">Calçados</em>
+            </div>
+            <div class="v-field v-field--lines">
+              <i></i><i></i><i></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="visual-step" data-visual="2">
+          <div class="v-shape v-shape--ring"></div>
+          <div class="v-mock v-mock--logo">
+            <div class="v-logo-circle">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4M12 4 7 9M12 4l5 5"/><path d="M4 16v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3"/></svg>
+            </div>
+            <div class="v-link-pill">vesthub.online/<b>sua-loja</b></div>
+          </div>
+        </div>
+
+        <div class="visual-step" data-visual="3">
+          <div class="v-shape v-shape--squircle"></div>
+          <div class="v-mock v-mock--lock">
+            <div class="v-lock">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10.5" width="16" height="10" rx="2"/><path d="M7.5 10.5V7a4.5 4.5 0 0 1 9 0v3.5"/></svg>
+            </div>
+            <div class="v-field v-field--sm"><span></span></div>
+            <div class="v-field v-field--sm"><span></span></div>
+          </div>
+        </div>
+
+        <p class="visual-caption">Faça seu cadastro grátis agora mesmo, e receba <strong>14 dias gratuitos!</strong></p>
+      </aside>
+
+      <!-- ===== formulário (direita) ===== -->
+      <div class="signup-form-panel">
+
+        <ol class="stepper" id="stepper">
+          <li class="step-item is-active" data-step-index="1">
+            <span class="step-num" aria-hidden="true">1</span>
+            <span class="step-label">Sua loja</span>
+          </li>
+          <li class="step-item" data-step-index="2">
+            <span class="step-num" aria-hidden="true">2</span>
+            <span class="step-label">Personalização</span>
+          </li>
+          <li class="step-item" data-step-index="3">
+            <span class="step-num" aria-hidden="true">3</span>
+            <span class="step-label">Sua conta</span>
+          </li>
+        </ol>
+
+        <form id="signupForm" novalidate>
+
+          <!-- PASSO 1 -->
+          <section class="step-panel is-active" data-step="1" aria-labelledby="step1-title">
+            <h2 id="step1-title" class="step-title">Conte sobre a sua loja</h2>
+            <p class="step-sub">Essas informações aparecem no seu catálogo para os clientes.</p>
+
+            <div class="field">
+              <label for="nomeLoja">Nome da loja</label>
+              <input type="text" id="nomeLoja" name="nomeLoja" placeholder="Ex: Luna Store" autocomplete="organization" required>
+              <span class="field-error" data-error-for="nomeLoja"></span>
+            </div>
+
+            <div class="field">
+              <label for="whatsappLoja">WhatsApp da loja</label>
+              <input type="tel" id="whatsappLoja" name="whatsappLoja" placeholder="(21) 90000-0000" inputmode="numeric" autocomplete="tel" required>
+              <span class="field-error" data-error-for="whatsappLoja"></span>
+            </div>
+
+            <div class="field">
+              <label for="categoriaLoja">Categoria da loja</label>
+              <select id="categoriaLoja" name="categoriaLoja" required>
+                <option value="" disabled selected>Selecione uma categoria</option>
+                <option value="roupas">Roupas</option>
+                <option value="calcados">Calçados</option>
+                <option value="acessorios">Acessórios</option>
+                <option value="roupas-calcados-acessorios">Roupas, calçados e acessórios</option>
+                <option value="outro">Outro</option>
+              </select>
+              <span class="field-error" data-error-for="categoriaLoja"></span>
+            </div>
+
+            <div class="field">
+              <label for="descricaoLoja">Descrição curta</label>
+              <textarea id="descricaoLoja" name="descricaoLoja" rows="3" maxlength="140" placeholder="Fale um pouco sobre a sua loja em uma frase." required></textarea>
+              <span class="field-hint"><span id="descCount">0</span>/140</span>
+              <span class="field-error" data-error-for="descricaoLoja"></span>
+            </div>
+          </section>
+
+          <!-- PASSO 2 -->
+          <section class="step-panel" data-step="2" aria-labelledby="step2-title">
+            <h2 id="step2-title" class="step-title">Personalize sua loja</h2>
+            <p class="step-sub">A logo e o link são o cartão de visita da sua vitrine.</p>
+
+            <div class="field">
+              <label>Logo da loja</label>
+              <div class="upload-box" id="uploadBox" tabindex="0" role="button" aria-describedby="uploadHint">
+                <input type="file" id="logoInput" name="logo" accept="image/png,image/jpeg,image/webp" hidden>
+                <div class="upload-empty" id="uploadEmpty">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4M12 4 7 9M12 4l5 5"/><path d="M4 16v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3"/></svg>
+                  <p><strong>Clique para enviar</strong> ou arraste a imagem aqui</p>
+                  <span id="uploadHint">PNG, JPG ou WEBP — até 5MB</span>
+                </div>
+                <div class="upload-preview" id="uploadPreview" hidden>
+                  <img id="uploadPreviewImg" alt="Prévia da logo">
+                  <div class="upload-preview-info">
+                    <strong id="uploadFileName"></strong>
+                    <span id="uploadFileSize"></span>
+                  </div>
+                  <button type="button" class="upload-remove" id="uploadRemove" aria-label="Remover imagem">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+                  </button>
+                </div>
+              </div>
+              <span class="field-error" data-error-for="logo"></span>
+            </div>
+
+            <div class="field">
+              <label for="linkLoja">Link da loja personalizado</label>
+              <div class="link-input">
+                <span class="link-prefix">vesthub.online/</span>
+                <input type="text" id="linkLoja" name="linkLoja" placeholder="sua-loja" autocomplete="off" spellcheck="false" required>
+              </div>
+              <span class="field-hint">Gerado a partir do nome da loja — você pode editar.</span>
+              <span class="field-error" data-error-for="linkLoja"></span>
+            </div>
+          </section>
+
+          <!-- PASSO 3 -->
+          <section class="step-panel" data-step="3" aria-labelledby="step3-title">
+            <h2 id="step3-title" class="step-title">Crie sua conta</h2>
+            <p class="step-sub">É o que você vai usar para entrar no painel da sua loja.</p>
+
+            <div class="field">
+              <label for="email">E-mail (login)</label>
+              <input type="email" id="email" name="email" placeholder="voce@email.com" autocomplete="email" required>
+              <span class="field-error" data-error-for="email"></span>
+            </div>
+
+            <div class="field">
+              <label for="senha">Senha</label>
+              <div class="password-input">
+                <input type="password" id="senha" name="senha" placeholder="Mínimo de 6 dígitos" autocomplete="new-password" minlength="6" required>
+                <button type="button" class="password-toggle" id="senhaToggle" aria-label="Mostrar senha" aria-pressed="false">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1.5 12S5 5 12 5s10.5 7 10.5 7-3.5 7-10.5 7S1.5 12 1.5 12Z"/><circle cx="12" cy="12" r="3"/></svg>
+                </button>
+              </div>
+              <span class="field-hint" id="senhaHint">Pelo menos 6 dígitos.</span>
+              <span class="field-error" data-error-for="senha"></span>
+            </div>
+
+            <label class="checkbox-field">
+              <input type="checkbox" id="termos" name="termos" required>
+              <span class="checkbox-box" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+              </span>
+              <span class="checkbox-text">Li e aceito os <a href="#termos" target="_blank" rel="noopener">termos de uso</a> e a <a href="#privacidade" target="_blank" rel="noopener">política de privacidade</a> do VestHub.</span>
+            </label>
+            <span class="field-error" data-error-for="termos"></span>
+          </section>
+
+          <div class="form-actions">
+            <button type="button" class="btn btn--ghost" id="backBtn" hidden>Voltar</button>
+            <button type="button" class="btn btn--solid" id="nextBtn">Continuar</button>
+            <button type="submit" class="btn btn--solid" id="submitBtn" hidden>Criar minha loja</button>
+          </div>
+        </form>
+
+        <div class="success-panel" id="successPanel" hidden>
+          <div class="success-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+          </div>
+          <h2>Sua loja foi criada!</h2>
+          <p>Prontinho — sua loja já está pronta. Agora é só montar o catálogo e começar a vender.</p>
+          <a class="btn btn--solid" href="index.html">Ir para a home</a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</main>
+
+<script src="cadastro.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Luna Store — VestHub</title>
+<meta name="description" content="Catálogo online. Faça seu pedido direto pelo WhatsApp.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Caveat:wght@700&family=DM+Serif+Display&family=Fraunces:ital,wght@0,900;1,900&family=Oswald:wght@700&family=Playfair+Display:ital,wght@1,900&family=Poppins:wght@800&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="loja.css">
+</head>
+<body>
+
+<header class="loja-topbar" id="lojaTopbar">
+  <span class="loja-topbar-brand">VEST<span class="hub">HUB</span></span>
+  <div class="loja-topbar-actions">
+    <button class="topbar-icon-btn" type="button" id="btnConta">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+      <span id="contaLabel">Entrar</span>
+    </button>
+    <button class="topbar-icon-btn" type="button" id="btnCarrinho">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1.4"/><circle cx="18" cy="21" r="1.4"/><path d="M2.5 3h2l2.4 12.2a2 2 0 0 0 2 1.6h7.9a2 2 0 0 0 2-1.6L21 7H6"/></svg>
+      <span>Carrinho</span>
+      <span class="cart-count" id="cartCount" hidden>0</span>
+    </button>
+  </div>
+</header>
+
+<main id="conteudo">
+
+  <section class="store-hero">
+    <h1 class="store-name" id="storeName">Nome da loja</h1>
+    <p class="store-tagline" id="storeTagline" hidden></p>
+    <div class="store-search-wrap">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+      <input id="storeSearchInput" type="search" placeholder="Buscar produto por nome, categoria ou tamanho" aria-label="Buscar produto" autocomplete="off">
+    </div>
+  </section>
+
+  <section class="featured" aria-label="Coleção em destaque">
+    <p class="featured-eyebrow">Coleção em destaque</p>
+    <div class="fc-viewport">
+      <div class="fc-track" id="fcTrack"></div>
+    </div>
+    <div class="fc-ui">
+      <div class="fc-dots" id="fcDots"></div>
+      <button class="fc-btn" type="button" id="fcPrev" aria-label="Anterior">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5 8 12l7 7"/></svg>
+      </button>
+      <button class="fc-btn" type="button" id="fcNext" aria-label="Próximo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m9 5 7 7-7 7"/></svg>
+      </button>
+    </div>
+  </section>
+
+  <section class="catalog" id="catalogo">
+    <div class="category-nav" id="categoryNav"></div>
+    <div class="subcategory-nav" id="subcategoryNav"></div>
+    <div class="product-grid" id="productGrid"></div>
+    <p class="catalog-empty" id="catalogEmpty" hidden>Nenhum produto encontrado nessa categoria.</p>
+  </section>
+
+</main>
+
+<footer class="loja-footer">
+  <p>Catálogo por <strong>VEST<span class="hub">HUB</span></strong> — sem comissão em cima da venda.</p>
+</footer>
+
+<!-- ===================== CARRINHO ===================== -->
+<div class="drawer-overlay" id="cartOverlay" hidden></div>
+<aside class="cart-drawer" id="cartDrawer" aria-label="Carrinho de compras">
+  <div class="drawer-head">
+    <h2>Seu carrinho</h2>
+    <button class="drawer-close" type="button" id="cartClose" aria-label="Fechar carrinho">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+  </div>
+
+  <div class="cart-items" id="cartItems"></div>
+  <p class="cart-empty" id="cartEmpty" hidden>Seu carrinho está vazio.<br>Adicione peças do catálogo para começar.</p>
+
+  <div class="cart-footer" id="cartFooter" hidden>
+    <div class="coupon-row">
+      <input type="text" id="cupomInput" placeholder="Código do cupom" autocomplete="off" spellcheck="false">
+      <button class="btn btn--sm" type="button" id="cupomApply">Aplicar</button>
+    </div>
+    <div class="coupon-applied" id="cupomApplied" hidden></div>
+    <p class="cupom-msg" id="cupomMsg"></p>
+
+    <div class="cart-summary">
+      <div class="cart-summary-row"><span>Subtotal</span><span id="cartSubtotal">R$ 0,00</span></div>
+      <div class="cart-summary-row is-discount" id="cartDiscountRow" hidden><span>Desconto</span><span id="cartDiscount">− R$ 0,00</span></div>
+      <div class="cart-summary-row is-total"><span>Total</span><span id="cartTotal">R$ 0,00</span></div>
+    </div>
+    <button class="btn btn--solid btn--full" type="button" id="btnFinalizar">Finalizar pedido</button>
+  </div>
+</aside>
+
+<!-- ===================== MODAL (conta / checkout) ===================== -->
+<div class="modal-overlay" id="modalOverlay" hidden>
+  <div class="modal" id="modal" role="dialog" aria-modal="true">
+    <button class="modal-close" id="modalClose" type="button" aria-label="Fechar">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<!-- ===================== TOASTS ===================== -->
+<div class="toast-stack" id="toastStack" aria-live="polite" aria-atomic="true"></div>
+
+<script src="loja.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Painel da loja — VestHub</title>
+<meta name="description" content="Painel administrativo do lojista VestHub: vendas, pedidos, estoque e cupons.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="painel.css">
+</head>
+<body>
+
+<a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+<header class="topbar">
+  <a class="brand" href="index.html">VEST<span class="hub">HUB</span></a>
+  <div class="topbar-store">
+    <span class="topbar-store-label">Loja</span>
+    <strong id="topbarStoreName">HYPE STREET</strong>
+  </div>
+  <button class="logout-pill" id="logoutBtn" type="button">
+    Sair
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/></svg>
+  </button>
+</header>
+
+<div class="shell">
+
+  <!-- ===================== SIDEBAR ===================== -->
+  <aside class="sidebar" id="sidebar">
+    <nav class="side-nav" aria-label="Navegação do painel">
+      <button class="side-link is-active" data-view="visao-geral" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>
+        <span>Visão geral</span>
+      </button>
+      <button class="side-link" data-view="pedidos" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        <span>Pedidos</span>
+        <span class="side-badge" id="navBadgePedidos" hidden>0</span>
+      </button>
+      <button class="side-link" data-view="estoque" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m21 8-9-5-9 5 9 5 9-5Z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg>
+        <span>Estoque</span>
+        <span class="side-badge side-badge--danger" id="navBadgeEstoque" hidden>0</span>
+      </button>
+      <button class="side-link" data-view="sem-venda" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M23 18 13.5 8.5l-5 5L1 6"/><path d="M17 18h6v-6"/></svg>
+        <span>Produtos sem venda</span>
+      </button>
+      <button class="side-link" data-view="cupons" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.6 12.8a2 2 0 0 0 0-1.6L18.4 6a2 2 0 0 0-1.8-1H7.4a2 2 0 0 0-1.8 1L3.4 11.2a2 2 0 0 0 0 1.6l2.2 5.2a2 2 0 0 0 1.8 1h9.2a2 2 0 0 0 1.8-1Z"/><path d="M9 9h.01"/><path d="M15 15h.01"/><path d="m9 15 6-6"/></svg>
+        <span>Cupons</span>
+      </button>
+      <button class="side-link" data-view="minha-loja" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5 12 3l9 6.5"/><path d="M5 10v9a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1v-9"/></svg>
+        <span>Minha loja</span>
+      </button>
+    </nav>
+
+    <button class="side-reset" id="resetDataBtn" type="button">Restaurar dados de exemplo</button>
+  </aside>
+
+  <!-- ===================== CONTEÚDO ===================== -->
+  <main id="conteudo">
+
+    <!-- ---------- VISÃO GERAL ---------- -->
+    <section class="view is-active" data-view="visao-geral" aria-labelledby="ov-title">
+      <div class="view-head">
+        <div>
+          <p class="view-eyebrow">Bem vindo de volta!</p>
+          <h1 class="view-title" id="ov-title" data-store-name-target>Nome da loja</h1>
+        </div>
+        <div class="period-filter" id="periodFilter" role="group" aria-label="Filtro de período">
+          <button type="button" data-days="1">Hoje</button>
+          <button type="button" data-days="7">7 dias</button>
+          <button type="button" data-days="30" class="is-active">30 dias</button>
+          <button type="button" data-days="90">3 meses</button>
+          <button type="button" data-days="180">6 meses</button>
+        </div>
+      </div>
+
+      <div class="kpi-grid" id="kpiGrid"></div>
+
+      <div class="panel-grid">
+        <div class="panel panel--goal">
+          <div class="panel-head">
+            <h2>Meta do mês</h2>
+          </div>
+          <div class="goal-row">
+            <div class="goal-ring" id="goalRing">
+              <svg viewBox="0 0 120 120">
+                <circle cx="60" cy="60" r="52" class="goal-track"/>
+                <circle cx="60" cy="60" r="52" class="goal-value" id="goalCircle"/>
+              </svg>
+              <div class="goal-ring-label">
+                <strong id="goalPercent">0%</strong>
+                <span>da meta</span>
+              </div>
+            </div>
+            <div class="goal-info">
+              <p><span id="goalCurrent">R$ 0</span> de <span id="goalTarget">R$ 0</span></p>
+              <p class="goal-hint">Meta mensal de faturamento</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel panel--ranking">
+          <div class="panel-head">
+            <h2>Ranking de vendas por produto</h2>
+            <span class="panel-hint">No período selecionado</span>
+          </div>
+          <ol class="ranking-list" id="rankingList"></ol>
+        </div>
+      </div>
+
+      <div class="panel-grid panel-grid--charts">
+        <div class="panel panel--chart">
+          <div class="panel-head">
+            <h2>Evolução do faturamento</h2>
+            <span class="panel-hint" id="faturamentoHint"></span>
+          </div>
+          <div class="chart-wrap" id="chartFaturamento"></div>
+        </div>
+        <div class="panel panel--chart">
+          <div class="panel-head">
+            <h2>Pedidos por período</h2>
+            <span class="panel-hint" id="pedidosHint"></span>
+          </div>
+          <div class="chart-wrap" id="chartPedidos"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- PEDIDOS ---------- -->
+    <section class="view" data-view="pedidos" aria-labelledby="pd-title">
+      <div class="view-head">
+        <div>
+          <p class="view-eyebrow">Gestão</p>
+          <h1 class="view-title" id="pd-title">Pedidos</h1>
+        </div>
+        <div class="period-filter" id="periodFilterPedidos" role="group" aria-label="Filtro de período dos pedidos">
+          <button type="button" data-days="7">7 dias</button>
+          <button type="button" data-days="30">30 dias</button>
+          <button type="button" data-days="90">3 meses</button>
+          <button type="button" data-days="180" class="is-active">6 meses</button>
+        </div>
+      </div>
+
+      <div class="toolbar">
+        <div class="search-input">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+          <input type="search" id="buscaCliente" placeholder="Buscar cliente pelo nome…" autocomplete="off">
+        </div>
+        <div class="status-chips" id="statusChips">
+          <button type="button" class="chip is-active" data-status="todos">Todos</button>
+          <button type="button" class="chip" data-status="pendente">Pendente</button>
+          <button type="button" class="chip" data-status="preparo">Em preparo</button>
+          <button type="button" class="chip" data-status="enviado">Enviado</button>
+          <button type="button" class="chip" data-status="entregue">Entregue</button>
+          <button type="button" class="chip" data-status="cancelado">Cancelado</button>
+        </div>
+      </div>
+
+      <div class="customer-card" id="customerCard" hidden></div>
+
+      <div class="table-wrap">
+        <table class="data-table" id="tabelaPedidos">
+          <thead>
+            <tr>
+              <th>Pedido</th>
+              <th>Cliente</th>
+              <th>Data</th>
+              <th>Itens</th>
+              <th>Valor</th>
+              <th>Status</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="tabelaPedidosBody"></tbody>
+        </table>
+        <p class="table-empty" id="pedidosEmpty" hidden>Nenhum pedido encontrado para esse filtro.</p>
+      </div>
+    </section>
+
+    <!-- ---------- ESTOQUE ---------- -->
+    <section class="view" data-view="estoque" aria-labelledby="es-title">
+      <div class="view-head">
+        <div>
+          <p class="view-eyebrow">Gestão</p>
+          <h1 class="view-title" id="es-title">Estoque</h1>
+        </div>
+        <button type="button" class="btn btn--solid" id="btnNovoProduto">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+          Adicionar produto
+        </button>
+      </div>
+
+      <div class="alert-banner" id="alertEstoque" hidden></div>
+
+      <div class="toolbar">
+        <div class="search-input">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+          <input type="search" id="buscaProduto" placeholder="Buscar produto…" autocomplete="off">
+        </div>
+        <select id="filtroCategoria" class="select-input">
+          <option value="todas">Todas as categorias</option>
+          <option value="roupas">Roupas</option>
+          <option value="calcados">Calçados</option>
+          <option value="acessorios">Acessórios</option>
+        </select>
+        <select id="filtroSubcategoria" class="select-input">
+          <option value="todas">Todas as subcategorias</option>
+        </select>
+      </div>
+
+      <div class="table-wrap">
+        <table class="data-table" id="tabelaEstoque">
+          <thead>
+            <tr>
+              <th>Produto</th>
+              <th>Categoria</th>
+              <th>Tamanho</th>
+              <th>Preço</th>
+              <th>Estoque</th>
+              <th>Mínimo</th>
+              <th>Status</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="tabelaEstoqueBody"></tbody>
+        </table>
+      </div>
+
+      <div class="panel-grid">
+        <div class="panel">
+          <div class="panel-head"><h2>Produtos com menor estoque</h2></div>
+          <ol class="mini-list" id="listaMenorEstoque"></ol>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><h2>Sem movimentação recente</h2></div>
+          <ol class="mini-list" id="listaSemMovimentacao"></ol>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-head"><h2>Últimas movimentações</h2></div>
+        <ol class="mov-list" id="listaMovimentacoes"></ol>
+      </div>
+    </section>
+
+    <!-- ---------- PRODUTOS SEM VENDA ---------- -->
+    <section class="view" data-view="sem-venda" aria-labelledby="sv-title">
+      <div class="view-head">
+        <div>
+          <p class="view-eyebrow">Análise</p>
+          <h1 class="view-title" id="sv-title">Produtos sem venda</h1>
+        </div>
+      </div>
+      <p class="view-sub">Produtos parados há 30 dias ou mais — hora de agir antes que virem prejuízo no estoque.</p>
+
+      <div class="table-wrap">
+        <table class="data-table" id="tabelaSemVenda">
+          <thead>
+            <tr>
+              <th>Produto</th>
+              <th>Sem vender há</th>
+              <th>Estoque atual</th>
+              <th>Ações sugeridas</th>
+            </tr>
+          </thead>
+          <tbody id="tabelaSemVendaBody"></tbody>
+        </table>
+        <p class="table-empty" id="semVendaEmpty" hidden>Nenhum produto parado — sua loja está girando bem!</p>
+      </div>
+    </section>
+
+    <!-- ---------- CUPONS ---------- -->
+    <section class="view" data-view="cupons" aria-labelledby="cp-title">
+      <div class="view-head">
+        <div>
+          <p class="view-eyebrow">Promoções</p>
+          <h1 class="view-title" id="cp-title">Cupons de desconto</h1>
+        </div>
+        <button type="button" class="btn btn--solid" id="btnNovoCupom">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+          Criar cupom
+        </button>
+      </div>
+
+      <div class="status-chips" id="cupomTabs">
+        <button type="button" class="chip is-active" data-cupom-status="todos">Todos</button>
+        <button type="button" class="chip" data-cupom-status="ativos">Ativos</button>
+        <button type="button" class="chip" data-cupom-status="expirados">Expirados</button>
+        <button type="button" class="chip" data-cupom-status="desativados">Desativados</button>
+      </div>
+
+      <div class="coupon-grid" id="coupomGrid"></div>
+    </section>
+
+    <!-- ---------- MINHA LOJA ---------- -->
+    <section class="view" data-view="minha-loja" aria-labelledby="ml-title">
+      <div class="view-head">
+        <div>
+          <p class="view-eyebrow">Vitrine</p>
+          <h1 class="view-title" id="ml-title">Minha loja</h1>
+        </div>
+        <a class="btn btn--solid" href="index.html" target="_blank" rel="noopener">
+          Visualizar loja
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></svg>
+        </a>
+      </div>
+      <p class="view-sub">Veja sua loja exatamente como o cliente enxerga — banners, produtos, categorias e promoções ativas.</p>
+
+      <div class="store-stats" id="storeStats"></div>
+
+      <div class="preview-toolbar">
+        <div class="device-toggle" id="deviceToggle">
+          <button type="button" class="is-active" data-device="desktop">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+            Desktop
+          </button>
+          <button type="button" data-device="mobile">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="2.5"/><path d="M10 18h4"/></svg>
+            Mobile
+          </button>
+        </div>
+      </div>
+
+      <div class="preview-frame-wrap" id="previewFrameWrap">
+        <iframe id="storePreview" src="index.html" title="Pré-visualização da loja" loading="lazy"></iframe>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- ===================== MODAL ===================== -->
+<div class="modal-overlay" id="modalOverlay" hidden>
+  <div class="modal" id="modal" role="dialog" aria-modal="true">
+    <button class="modal-close" id="modalClose" type="button" aria-label="Fechar">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<!-- ===================== TOASTS ===================== -->
+<div class="toast-stack" id="toastStack" aria-live="polite" aria-atomic="true"></div>
+
+<script src="painel.js" defer></script>
+</body>
+</html>
